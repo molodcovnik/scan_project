@@ -1,0 +1,27 @@
+
+.header-signin {
+    margin-right: 60px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-signin a {
+    text-decoration: none;  
+    color: #000000;
+    opacity: 0.4;
+    letter-spacing: 1px;
+    font: 1rem 'Inter' 'sans-serif';
+    margin-top: 3px;
+}
+
+.signin {
+    width: 65px;
+    height: 26px;
+    background-color: #7CE3E1;
+    border: none;
+    padding: 0 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Inter';
+}

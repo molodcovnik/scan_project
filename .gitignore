@@ -1,0 +1,11 @@
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+node_modules/
+.vscode/
+package-lock.json

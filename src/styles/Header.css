@@ -1,0 +1,28 @@
+.header-container {
+    max-width: 100%;
+    height: 93px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter';
+    /* font-size: 14px; */
+}
+
+.header-logo {
+    margin-left: 60px;
+}
+
+.header-menu {
+    width: 236px;
+}
+
+.header-menu a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.header-menu ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
