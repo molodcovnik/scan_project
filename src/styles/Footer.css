@@ -21,3 +21,17 @@
     font-weight: 400;
     text-align: right;
 }
+
+@media only screen and (max-width: 480px) {
+    .footer {
+        max-width: 100%;
+        position: absolute;
+        bottom: -1200px;
+    }
+    .logo-footer {
+        margin-left: 1rem;
+    }
+    .adress {
+        margin-right: 1rem;
+    }
+}

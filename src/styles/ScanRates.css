@@ -113,3 +113,68 @@
 .btn-detail {
     margin: 60px 40px;
 }
+
+@media only screen and (max-width: 480px) {
+    .rates {
+        max-width: 90%;
+        margin-left: 5%;
+        /* height: 664px; */
+        /* margin: 0 auto; */
+    }
+    
+    .rates > p {
+        font-size: 28px;
+        
+    }
+    .rates-wrapper {
+        margin-top: 0;
+        display: inline-block;
+        
+    }
+    .rate {
+        width: 335px;
+        height: 512px;
+        border-radius: 10px;
+        border: #ebe9e9 solid 2px;
+        margin-top: 40px;
+    }
+    /* .rate:first-of-type .btn-detail .btn {
+        margin-top: -55px;
+    } */
+    .rate-header {
+        display: flex;
+        justify-content: space-around;
+        width: 335px;
+        height: 132px;
+    }
+    .btn-detail .btn{
+        margin-top: 15px;
+        width: 285px;
+        height: 59px;
+        
+    }
+    .rate-text p:first-child{
+        margin-top: 20px;
+        font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial;
+        font-size: 30px;
+        font-weight: 500;
+        margin-left: 14px;
+    }
+
+    .about-rate > p {
+        margin-left: 30px;
+        margin-top: 30px;
+        font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .info {
+        margin-top: 25px auto 36px;
+    }
+    .btn-detail {
+        margin: 20px 14px;
+    }
+    .rate-text p:last-child{
+       padding-left: 14px;
+    }
+}

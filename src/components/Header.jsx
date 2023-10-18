@@ -19,8 +19,8 @@ const Header = () => {
                         <li><a href='#'>FAQ</a></li>
                     </ul>
                 </div>
-                {/* <HeaderSignIn />  */}
-                <HeaderAuth />
+                <HeaderSignIn /> 
+                {/* <HeaderAuth /> */}
             </div>
         </header>
     );
