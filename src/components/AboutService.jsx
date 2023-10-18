@@ -1,8 +1,9 @@
 import React from 'react';
 
+import '../styles/AboutService.css';
+
 const AboutService = () => {
     return (
-        <>
         <div className="about-service-wrapper">
             <div className="about-service">
                 <p>сервис по поиску публикаций <br />о компании <br />по его ИНН</p>
@@ -14,7 +15,6 @@ const AboutService = () => {
                 <img src="about_img.svg" alt="about"/>
             </div>
         </div>
-        </>
     );
 };
 

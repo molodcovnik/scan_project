@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../styles/ScanRates.css';
+
 const ScanRates = () => {
     return (
         <div className="rates">

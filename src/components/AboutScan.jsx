@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../styles/AboutScan.css';
+
 const AboutScan = () => {
     return (
         <div className="about-scan-wrapper">

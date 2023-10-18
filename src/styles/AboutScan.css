@@ -1,0 +1,52 @@
+
+.about-scan-wrapper {
+    width: 1346px;
+    margin: 0 auto;
+}
+
+.about-scan-wrapper > p {
+    font-family: 'Ferry', 'Helvetica Neue', Helvetica, Arial, sans-;
+    font-size: 45px;
+}
+
+.slider-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.slide {
+    width: 400px;
+    height: 225px;
+    border: rgb(214, 210, 210) 2px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.icon-left, .icon-right {
+    width: 39px;
+    height: 39px;
+    margin-top: 8%;
+}
+
+.slider-image {
+    width: 64px;
+    height: 64px;
+    padding-left: 20px;
+}
+
+.slider-text {
+    font: 'Inter', 'Helvetica Neue', Helvetica, Arial;
+    font-size: 18px;
+    font-weight: 400;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.sample-img {
+    width: 1300px;
+    height: 575px;
+    margin: 70px auto 107px;
+}

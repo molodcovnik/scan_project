@@ -3,21 +3,19 @@ import React from 'react';
 import AboutService from './AboutService';
 import AboutScan from './AboutScan';
 import ScanRates from './ScanRates';
+import '../styles/MainPage.css';
 
-import '../styles/Main.css';
-
-const Main = () => {
+const MainPage = () => {
     return (
-        <main className='main'>
+        <>
             <AboutService/>
             <AboutScan/>
             <div className='sample-img'>
                 <img src="group.svg" alt="image" />
             </div>
-            <ScanRates/> 
-        </main>
-        
+            <ScanRates/>
+        </>
     );
 };
 
-export default Main;
+export default MainPage;
