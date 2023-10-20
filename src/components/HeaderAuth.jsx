@@ -1,18 +1,43 @@
 import React from 'react';
 
-import '../styles/HeaderAuth.css';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-const HeaderAuth = () => {
+import '../styles/HeaderAuth.css';
+import { Link } from 'react-router-dom';
+
+const HeaderAuth = (props) => {
+    // console.log(props.token);
+    const [companyCount, setCompanyCount] = React.useState(0);
+    const [companyLimit, setCompanyLimit] = React.useState(0);
+
+    const url = 'https://gateway.scan-interfax.ru/api/v1/account/info';
+
+    useEffect(() => {
+        axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${props.token}`
+            }
+        })
+        .then(response => {
+            console.log(response);
+           setCompanyCount(response.data.eventFiltersInfo.usedCompanyCount);
+           setCompanyLimit(response.data.eventFiltersInfo.companyLimit);
+       })
+        .catch(error => console.log(error));
+    }, [props.token]);
+
     return (
         <div className="header-auth">   
             <div className="user-limit">
-                <p>Использовано компаний <span className='use limit'>34</span></p>
-                <p>Лимит по компаниям <span className='max limit'>100</span></p>
+                {/* <p>Использовано компаний <span className='use limit'>{companyCount}</span></p> */}
+                <div><span className='opacity'>Использовано компаний </span><span lassName='use limit'>{companyCount}</span></div>
+                <div><span className='opacity'>Лимит по компаниям </span><span className='max limit'>{companyLimit}</span></div>
             </div>
             <div className="user-info">
                 <div className="user-name">
                     <p>Alexey P.</p>
-                    <a href="#" className='logout'>Выйти</a>
+                    <Link to={'/auth'} onClick={(e) => localStorage.removeItem('token')} className='logout'>Выйти</Link>
                 </div>
                 <div className="user-avatar">
                     <img src="avatar.png" alt="avatar" />

@@ -1,16 +1,23 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import HeaderSignIn from './HeaderSignIn';
 import HeaderAuth from './HeaderAuth';
 import '../styles/Header.css';
 
 
 const Header = () => {
+    const [isLogin, setIsLogin] = React.useState(false);
+
+    let token = localStorage.getItem('token');
+    // console.log(token);
+
     return (
         <header>
             <div className="header-container">
                 <div className="header-logo">
-                    <img src="scan_logo.svg" alt="logo" />
+                    <Link to={'/'}><img src="scan_logo.svg" alt="logo" /></Link>
                 </div>
                 <div className="header-menu">
                     <ul>
@@ -19,8 +26,8 @@ const Header = () => {
                         <li><a href='#'>FAQ</a></li>
                     </ul>
                 </div>
-                <HeaderSignIn /> 
-                {/* <HeaderAuth /> */}
+                {token ? <HeaderAuth token={token}/> : <HeaderSignIn />}
+                
             </div>
         </header>
     );

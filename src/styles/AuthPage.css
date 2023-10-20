@@ -42,6 +42,7 @@
     font-size: 16px; 
     color: #029491;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .form-header .header-item:first-child span{
@@ -97,6 +98,10 @@
     height: 43px;
     border: #C7C7C7 solid 2px;
     border-radius: 5px;
+    font-family: 'Inter', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 15px;
 }
 
 .form-auth-input input:first-of-type {
