@@ -1,0 +1,46 @@
+.search-wrapper {
+    display: flex;
+    margin-left: 30px;
+    margin-top: 60px;
+    
+}
+
+.search-main-container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.search-main-container h1 {
+    font-family: 'Ferry', 'Arial' , sans-serif;
+    font-size: 48px;
+    margin-bottom: 25px;
+
+}
+
+.search-main-container p {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+
+.search-image {
+    width: 500px;
+}
+
+.pic:first-of-type {
+    margin-left: -40px;
+}
+
+.pic:nth-of-type(2) {
+    margin-top: -70px;
+    margin-left: 180px;
+}
+
+.pic:last-of-type {
+
+    width: 440px;
+    height: 370px;
+    margin-top: 40px;
+    margin-left: 10px;
+}

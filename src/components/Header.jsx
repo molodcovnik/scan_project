@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -6,13 +6,10 @@ import HeaderSignIn from './HeaderSignIn';
 import HeaderAuth from './HeaderAuth';
 import '../styles/Header.css';
 
-
 const Header = () => {
-    const [isLogin, setIsLogin] = React.useState(false);
 
-    let token = localStorage.getItem('token');
-    // console.log(token);
-
+    const token = localStorage.getItem('token');
+    
     return (
         <header>
             <div className="header-container">

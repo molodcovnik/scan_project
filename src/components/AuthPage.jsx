@@ -22,6 +22,7 @@ const AuthPage = () => {
             const response = await axios.post(url, data);
             console.log(response);
             localStorage.setItem('token', response.data.accessToken);
+            location.reload()
         } catch (error) {
             console.log(error);
         }

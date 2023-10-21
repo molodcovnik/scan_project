@@ -21,8 +21,8 @@ const HeaderAuth = (props) => {
         })
         .then(response => {
             console.log(response);
-           setCompanyCount(response.data.eventFiltersInfo.usedCompanyCount);
-           setCompanyLimit(response.data.eventFiltersInfo.companyLimit);
+            setCompanyCount(response.data.eventFiltersInfo.usedCompanyCount);
+            setCompanyLimit(response.data.eventFiltersInfo.companyLimit);
        })
         .catch(error => console.log(error));
     }, [props.token]);
@@ -30,14 +30,15 @@ const HeaderAuth = (props) => {
     return (
         <div className="header-auth">   
             <div className="user-limit">
-                {/* <p>Использовано компаний <span className='use limit'>{companyCount}</span></p> */}
-                <div><span className='opacity'>Использовано компаний </span><span lassName='use limit'>{companyCount}</span></div>
+                {/* <p>Использовано компаний <span className='use limit'>1</span></p> */}
+                <div><span className='opacity'>Использовано компаний </span><span className='use limit'>{companyCount}</span></div>
                 <div><span className='opacity'>Лимит по компаниям </span><span className='max limit'>{companyLimit}</span></div>
             </div>
             <div className="user-info">
                 <div className="user-name">
                     <p>Alexey P.</p>
-                    <Link to={'/auth'} onClick={(e) => localStorage.removeItem('token')} className='logout'>Выйти</Link>
+                    <Link to={'/auth'} onClick={(e) => {localStorage.removeItem('token');
+                    location.reload()}} className='logout'>Выйти</Link>
                 </div>
                 <div className="user-avatar">
                     <img src="avatar.png" alt="avatar" />
