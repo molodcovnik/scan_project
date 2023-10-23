@@ -22,9 +22,12 @@ const AuthPage = () => {
             const response = await axios.post(url, data);
             console.log(response);
             localStorage.setItem('token', response.data.accessToken);
-            location.reload()
+            // location.reload()
+            location.href = '/';
+            
         } catch (error) {
             console.log(error);
+            
         }
     }
 

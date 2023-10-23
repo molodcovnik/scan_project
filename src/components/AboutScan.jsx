@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Slider from './Slider';
+
 import '../styles/AboutScan.css';
 
 const AboutScan = () => {
@@ -7,10 +9,7 @@ const AboutScan = () => {
         <div className="about-scan-wrapper">
                 <p>почему именно мы</p>
                 <div className="slider-wrapper">
-                    <div className="icon-left">
-                        <img src="icon_left.svg" alt="left" />
-                    </div>
-                    <div className="slide">
+                    {/* <div className="slide">
                         <div className="slider-image">
                             <img src="timer.svg" alt="timer" />
                         </div>
@@ -33,10 +32,9 @@ const AboutScan = () => {
                         <div className="slider-text">
                             <p>Защита конфеденциальных сведений, <br />не подлежащих разглашению по <br />федеральному законодательству</p>
                         </div>
-                    </div>
-                    <div className="icon-right">
-                        <img src="icon_right.svg" alt="right" />
-                    </div>
+                    </div> */}
+                    <Slider/>
+                    
                 </div>
                 
             </div>

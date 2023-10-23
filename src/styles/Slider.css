@@ -1,0 +1,34 @@
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/scrollbar';
+
+
+.main-slider-container {
+    margin: 0 auto;
+    width: 1320px;
+    height: 500px;
+}
+.swiper {
+    width: 100%;
+
+}
+
+.swiper-button-next::after {
+    color: #888787;
+}
+
+.swiper-button-prev::after {
+    color: #888787;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .main-slider-container {
+
+        width: 90%;
+    }
+    .my-slide-wrap {
+        text-align: center;;
+    }
+}

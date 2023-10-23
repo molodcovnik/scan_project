@@ -50,7 +50,7 @@
     color: #9c9b9b;
 }
 
-.tin::after, .count-doc::after, .range-date::after {
+.inn::after, .count-doc::after, .range-date::after {
     content: "*";
     margin-left: 4px;
     font-size: 25px;
@@ -141,4 +141,9 @@
     font-weight: 400;
     color: #949494;
     float: left;
+}
+
+.non-active {
+    opacity: .5;
+    cursor: none;
 }
