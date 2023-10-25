@@ -2,6 +2,9 @@ import React from 'react';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
+import store from '../store';
+
 import '../styles/SearchForm.css';
 
 
@@ -42,94 +45,19 @@ const SearchForm = () => {
     const [excludeDigests, setExcludeDigests] = React.useState(true);
 
     async function handleSelect() {
-        // console.log(`INN ${inn}`);
-        // console.log(`Тональность ${tonality}`);
-        // console.log(`Количество доков ${limit}`);
 
-        // console.log(`Дата начала ${startDate.toJSON()}`);
-        // console.log(`Дата конца ${endDate}`);
-
-        // console.log(`Признак максимальной полноты ${maxFullness}`);
-        // console.log(`Упоминания в бизнес-контексте ${inBusinessNews}`);
-        // console.log(`Главная роль в публикации ${onlyMainRole}`);
-        // console.log(`Публикации только с риск-факторами ${onlyWithRiskFactors}`);
-        // console.log(`Включать технические новости рынков ${excludeTechNews}`);
-
-        // console.log(`Включать анонсы и календари ${excludeAnnouncements}`);
-
-        // console.log(`Включать сводки новостей ${excludeDigests}`);
-
-        const urlHistograms = 'https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms';
-
-        const headers = {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-
-        const data = {
-            "issueDateInterval": {
-                "startDate": `${startDate}`,
-                "endDate": `${endDate}`,
-              },
-              "searchContext": {
-                "targetSearchEntitiesContext": {
-                  "targetSearchEntities": [
-                    {
-                      "type": "company",
-                      "sparkId": null,
-                      "entityId": null,
-                      "inn": `${inn}`,
-                      "maxFullness": `${maxFullness}`,
-                      "inBusinessNews": `${inBusinessNews}`
-                    }
-                  ],
-                  "onlyMainRole": `${onlyMainRole}`,
-                  "tonality": `${tonality}`,
-                  "onlyWithRiskFactors": `${onlyWithRiskFactors}`,
-                  "riskFactors": {
-                    "and": [],
-                    "or": [],
-                    "not": []
-                  },
-                  "themes": {
-                    "and": [],
-                    "or": [],
-                    "not": []
-                  }
-                },
-                "themesFilter": {
-                  "and": [],
-                  "or": [],
-                  "not": []
-                }
-              },
-              "searchArea": {
-                "includedSources": [],
-                "excludedSources": [],
-                "includedSourceGroups": [],
-                "excludedSourceGroups": []
-              },
-              "attributeFilters": {
-                "excludeTechNews": `${excludeTechNews}`,
-                "excludeAnnouncements": `${excludeAnnouncements}`,
-                "excludeDigests": `${excludeDigests}`
-              },
-              "similarMode": "duplicates",
-              "limit": `${limit}`,
-              "sortType": "sourceInfluence",
-              "sortDirectionType": "desc",
-              "intervalType": "month",
-              "histogramTypes": [
-                "totalDocuments",
-                "riskFactors"
-              ]
-        }
-        
-        const response = await axios.post(urlHistograms, data, {headers})
-        console.log(response);
-
-        // console.log(data);
+        store.dispatch({type: 'ADD_INN', payload: inn});
+        store.dispatch({type: 'ADD_TONALITY', payload: tonality});
+        store.dispatch({type: 'ADD_LIMIT', payload: limit});
+        store.dispatch({type: 'ADD_START_DATE', payload: startDate});
+        store.dispatch({type: 'ADD_END_DATE', payload: endDate});
+        store.dispatch({type: 'ADD_ONLY_MAIN_ROLE', payload: onlyMainRole});
+        store.dispatch({type: 'ADD_ONLY_WITH_RISK_FACTORS', payload: onlyWithRiskFactors});
+        store.dispatch({type: 'ADD_EXCLUDE_TECH_NEWS', payload: excludeTechNews});
+        store.dispatch({type: 'ADD_EXCLUDE_ANNOUNCEMENTS', payload: excludeAnnouncements});
+        store.dispatch({type: 'ADD_EXCLUDE_DIGESTS', payload: excludeDigests});
+        store.dispatch({type: 'ADD_MAX_FULLNESS', payload: maxFullness});
+        store.dispatch({type: 'ADD_IN_BUSINESS_NEWS', payload: inBusinessNews});
 
     }
     return (
@@ -186,7 +114,8 @@ const SearchForm = () => {
                 </div>
                
                 <div className="find-button-block">
-                    <Link to="#" onClick={handleSelect} className={`btn find-btn ${inn != '' & startDate != '' & endDate != '' ? 'visible' : 'non-active' }`}>Поиск</Link>
+                    <Link to="/results" onClick={handleSelect} className={`btn find-btn`}>Поиск</Link>
+                    {/* <button onClick={handleSelect} className={`btn find-btn ${inn != '' & startDate != '' & endDate != '' ? 'visible' : 'non-active' }`}>Поиск</button> */}
                     <p>* Обязательные к заполнению поля</p>
                 </div>
             </div>       

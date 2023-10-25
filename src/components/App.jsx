@@ -9,6 +9,7 @@ import Slider from "./Slider";
 import '../styles/App.css';
 import FirstPage from "./FirstPage";
 import Search from "./Search";
+import ResultsPage from "./ResultsPage";
 
 
 function App () {
@@ -19,7 +20,7 @@ function App () {
                     <Route index element={<MainPage/>}/>
                     <Route path="auth" element={<AuthPage/>}/>
                     <Route path="search" element={<Search/>}/>
-                    <Route path="slider" element={<Slider/>}/>
+                    <Route path="results" element={<ResultsPage/>}/>
                 </Route>
             </Routes>
         </>
