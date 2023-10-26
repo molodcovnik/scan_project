@@ -88,3 +88,7 @@
 .slide-line:last-of-type {
     margin-right: 15px;
 }
+
+.refresh-btn {
+    background-color: #029491;
+}

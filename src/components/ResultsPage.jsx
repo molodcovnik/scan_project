@@ -1,5 +1,6 @@
 import React from 'react';
 
+import LoaderTable from './LoaderTable';
 import axios from 'axios';
 import SummarySlide from './SummarySlide';
 import { useEffect } from 'react';
@@ -97,6 +98,7 @@ const ResultsPage = () => {
     if (!totalDocuments.length) {
         axios.post(urlHistograms, data, {headers})
         .then(res => {
+            console.log(res.data.data);
             setTotalData(res.data.data);
             setTotalDocuments(res.data.data[0].data);
             setRiskFactors(res.data.data[1].data);
@@ -121,6 +123,7 @@ const ResultsPage = () => {
                 </div>
                 {totalDocuments.length > 0 ? <div className="gen-summary-wrapper">
                     <h2>Общая сводка</h2>
+                    <p>{inn}</p>
                     <p>Найдено {totalDocuments.length} вариантов</p>
                      <div className="gen-summary">
 
@@ -129,18 +132,29 @@ const ResultsPage = () => {
                                 <p>Всего</p>
                                 <p>Риски</p>
                             </div>
-                            {totalDocuments.map((total) =>
+                            {/* {totalDocuments.map((total) =>
                                 <SummarySlide key={total.date} total={total}/>
-                                
-                            
-                            )}
-                            {/* {totalData.map((total) =>
-                                <SummarySlide key={total.date} total={total}/>
-
                             )} */}
+                            {(totalDocuments.length && riskFactors.length) ? 
+                                totalDocuments.map(item1 => {
+                                    const matchingItem = riskFactors.find(item2 => item1.date === item2.date);
+                                    if (matchingItem) {
+                                        return (
+                                            <SummarySlide key={item1.date} date={item1.date} total={item1.value} risks={matchingItem.value}/>
+    
+                                    )};
+                                }): <p>No data</p>
+                            }
+                            
                              
                     </div> 
-                </div> : <p>Waiting...</p>}
+                </div> : <LoaderTable/>}
+                <button className='btn refresh-btn' onClick={() => {
+                    location.reload();
+                    location.href='/search'}}>Перезагрузка</button>
+            </div>
+            <div className="articles-wrapper">
+                <h2>Articles</h2>
             </div>
         </>
     );
