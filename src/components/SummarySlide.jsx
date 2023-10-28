@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SummarySlide = (props) => {
-    console.log(props);
+    // console.log(props);
     let year = props.date.slice(0, 4)
     let month = props.date.slice(5, 7)
     let day = props.date.slice(8, 10)

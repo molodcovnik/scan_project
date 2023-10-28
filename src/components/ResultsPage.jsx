@@ -7,13 +7,23 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import store from '../store';
 
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
 import '../styles/ResultsPage.css';
+import DocumentsList from './DocumentsList';
+
+
 
 const ResultsPage = () => {
+
+    const state = store.getState();
+
     const [totalDocuments, setTotalDocuments] = React.useState([]);
     const [riskFactors, setRiskFactors] = React.useState([]);
     const [totalData, setTotalData] = React.useState([]);
-    const state = store.getState();
+    const [listId, setListId] = React.useState([]);
 
     let inn = state.inn.at(1);
     let startDate = state.startDate.at(1);
@@ -29,6 +39,7 @@ const ResultsPage = () => {
     let excludeDigests = state.excludeDigests.at(1);
 
     const urlHistograms = 'https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms';
+    const urlObjects = 'https://gateway.scan-interfax.ru/api/v1/objectsearch';
 
     const headers = {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -108,9 +119,32 @@ const ResultsPage = () => {
             console.log(err);
         })};
 
+    // if (!listId.length) {
+    //     axios.post(urlObjects, data, {headers})
+    //     .then(res => {
+    //         setListId(res.data.items);
+    //    })
+    //    .catch(err => {
+    //         console.log(err);
+    //     })};
+    
+    if (!listId.length) {
+        axios.post(urlObjects, data, {headers})
+        .then(res => {
+            res.data.items.map((item) => {
+                setListId(listId => [...listId, item.encodedId]);
+                // setListId([...listId, item.encodedId]);
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })};
+
+    let uniqueId = [...new Set(listId)];
 
     return (
         <>
+            <div className="results-page">
             <div className="results-page-container">
                 <div className="info-block">
                     <div className="info-text">
@@ -132,9 +166,7 @@ const ResultsPage = () => {
                                 <p>Всего</p>
                                 <p>Риски</p>
                             </div>
-                            {/* {totalDocuments.map((total) =>
-                                <SummarySlide key={total.date} total={total}/>
-                            )} */}
+
                             {(totalDocuments.length && riskFactors.length) ? 
                                 totalDocuments.map(item1 => {
                                     const matchingItem = riskFactors.find(item2 => item1.date === item2.date);
@@ -143,18 +175,17 @@ const ResultsPage = () => {
                                             <SummarySlide key={item1.date} date={item1.date} total={item1.value} risks={matchingItem.value}/>
     
                                     )};
-                                }): <p>No data</p>
-                            }
-                            
-                             
+                                }): <p>No data</p>}
                     </div> 
                 </div> : <LoaderTable/>}
-                <button className='btn refresh-btn' onClick={() => {
+                
+            </div>
+            </div>
+            <button className='btn refresh-btn' onClick={() => {
                     location.reload();
                     location.href='/search'}}>Перезагрузка</button>
-            </div>
-            <div className="articles-wrapper">
-                <h2>Articles</h2>
+            <div className="results-wrapper-block">
+                <DocumentsList lists={uniqueId}/>
             </div>
         </>
     );

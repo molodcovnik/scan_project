@@ -1,0 +1,25 @@
+.articles-title {
+    width: 1346px;
+    margin: 50px auto;
+    
+}
+
+.articles-title > h2 {
+    font-size: 30px;
+    font-family: 'Ferry', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+}
+
+.articles-wrapper {
+    /* width: 100%; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.load-more {
+    margin-top: 50px;
+    margin-left: 38%;
+    cursor: pointer;
+}
