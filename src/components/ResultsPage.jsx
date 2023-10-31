@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LoaderTable from './LoaderTable';
+import Loader from './Loader';
 import axios from 'axios';
 import SummarySlide from './SummarySlide';
 import { useEffect } from 'react';
@@ -24,6 +25,8 @@ const ResultsPage = () => {
     const [riskFactors, setRiskFactors] = React.useState([]);
     const [totalData, setTotalData] = React.useState([]);
     const [listId, setListId] = React.useState([]);
+
+    const [statusDocs, setStatusDocs] = React.useState('');
 
     let inn = state.inn.at(1);
     let startDate = state.startDate.at(1);
@@ -105,40 +108,28 @@ const ResultsPage = () => {
             "riskFactors"
             ]
     }
-    
-    if (!totalDocuments.length) {
-        axios.post(urlHistograms, data, {headers})
-        .then(res => {
-            console.log(res.data.data);
-            setTotalData(res.data.data);
-            setTotalDocuments(res.data.data[0].data);
-            setRiskFactors(res.data.data[1].data);
 
-        })
-        .catch(err => {
-            console.log(err);
-        })};
+    const endpoints = [
+        urlHistograms,
+        urlObjects
+    ];
 
-    // if (!listId.length) {
-    //     axios.post(urlObjects, data, {headers})
-    //     .then(res => {
-    //         setListId(res.data.items);
-    //    })
-    //    .catch(err => {
-    //         console.log(err);
-    //     })};
-    
-    if (!listId.length) {
-        axios.post(urlObjects, data, {headers})
-        .then(res => {
-            res.data.items.map((item) => {
+    useEffect(() => {
+        axios.all(endpoints.map(endpoint => axios.post(endpoint, data, {headers})))
+        .then(axios.spread((histograms, objects) => {
+            if (objects.statusText === "OK") {
+                setStatusDocs(objects.statusText)
+            }
+            setTotalData(histograms.data.data);
+            setTotalDocuments(histograms.data.data[0].data);
+            setRiskFactors(histograms.data.data[1].data);
+
+            objects.data.items.map((item) => {
                 setListId(listId => [...listId, item.encodedId]);
-                // setListId([...listId, item.encodedId]);
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        })};
+                });
+            }),
+        )},
+    []);
 
     let uniqueId = [...new Set(listId)];
 
@@ -184,9 +175,9 @@ const ResultsPage = () => {
             <button className='btn refresh-btn' onClick={() => {
                     location.reload();
                     location.href='/search'}}>Перезагрузка</button>
-            <div className="results-wrapper-block">
-                <DocumentsList lists={uniqueId}/>
-            </div>
+            {statusDocs === "OK" ? <div className="results-wrapper-block">
+                <DocumentsList lists={uniqueId} status={statusDocs}/>
+            </div> : <Loader/>}
         </>
     );
 };

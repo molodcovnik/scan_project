@@ -23,3 +23,18 @@
     margin-left: 38%;
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 480px) {
+    .articles-title {
+        max-width: 100%;
+        height: auto;
+    }
+    .articles-wrapper {
+        flex-direction: column;
+    }
+    .load-more {
+        margin: 30px auto;
+        cursor: pointer;
+    }
+}

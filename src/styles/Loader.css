@@ -24,3 +24,9 @@ img.rot {
     margin-left: 45%;
     margin-top: 50px;
 }
+
+@media only screen and (max-width: 480px) {
+  .rot-block {
+    margin-left: 25%;
+  }
+}

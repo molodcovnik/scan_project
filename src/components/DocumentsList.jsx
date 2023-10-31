@@ -7,14 +7,13 @@ import Loader from './Loader';
 
 
 const DocumentsList = (props) => {
-
+    // console.log(props.lists);
     const urlDocuments = 'https://gateway.scan-interfax.ru/api/v1/documents';
 
-    // console.log(props.lists.slice(0, 10));
     const [articles, setArticles] = React.useState([]);
-
-    const [startPage, setStartPage] = React.useState(0);
-    const [endPage, setEndPage] = React.useState(10);
+    const [currentPage, setCurrentPage] = React.useState(0);
+    const [startPage, setStartPage] = React.useState(-10);
+    const [endPage, setEndPage] = React.useState(0);
 
     const headers = {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -24,58 +23,39 @@ const DocumentsList = (props) => {
 
     let data = {
         ids: props.lists.slice(startPage, endPage),
-      }
+    }
 
-    console.log(data);
     
     function getNextPage() {
         setStartPage(startPage + 10);
         setEndPage(endPage + 10);
-        console.log(data);
-
+        setCurrentPage(currentPage + 1);    
+        // console.log(data.ids.length);
     }
-    
-    // if (props.lists) {
-    //     axios.post(urlDocuments, data, {headers})
-    //     .then(res => {
-    //         setArticles(res.data);
 
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // };
-
-    // useEffect(() => {
-    //     axios.post(urlDocuments, data, {headers})
-    //     .then(res => {
-    //         console.log(res.data);
-    //         // setArticles(res.data);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // }, []);
-    
-
+   
+    useEffect (() => {
+        axios.post(urlDocuments, data, {headers})
+        .then(res => {
+            setArticles(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }, [startPage, endPage]);
 
     return (
         <>
             <div className="articles-title">
                 <h2>Список документов</h2>
                 <div className="articles-wrapper">
-                    {/* {articles ? 
-                        articles.map((article, index) => (
-                            <Article key={article.ok.id} article={article} />
-                            
-                        )) : <Loader/>} */}
-                    <Loader/>
+
+                    {articles.map((article, index) => (
+                        <Article key={article.ok.id} article={article} />
                         
-                    {/* {props.lists ? props.lists.map(item => (
-                        <Article key={item.encodedId} id={item.encodedId}/>
-                    )) : <Loader/>};     */}
+                    ))}
                 </div>
-                <button className='btn load-more' onClick={getNextPage}>Показать еще</button>
+                <button className='btn load-more' onClick={getNextPage}>{currentPage == 0 ? 'Показать статьи' : 'Показать еще'}</button>
 
             </div>
         </>

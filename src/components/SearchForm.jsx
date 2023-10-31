@@ -114,8 +114,8 @@ const SearchForm = () => {
                 </div>
                
                 <div className="find-button-block">
-                    <Link to="/results" onClick={handleSelect} className={`btn find-btn`}>Поиск</Link>
-                    {/* <button onClick={handleSelect} className={`btn find-btn ${inn != '' & startDate != '' & endDate != '' ? 'visible' : 'non-active' }`}>Поиск</button> */}
+                    <Link to="/results" onClick={handleSelect} className={`btn find-btn ${inn != '' & startDate != '' & endDate != '' ? 'visible' : 'non-active' }`}>Поиск</Link>
+                    {/* <button onClick={() => {}} className={`btn find-btn`}>Поиск</button> */}
                     <p>* Обязательные к заполнению поля</p>
                 </div>
             </div>       

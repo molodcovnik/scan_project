@@ -97,3 +97,50 @@
     cursor: pointer;
 
 }
+
+@media only screen and (max-width: 480px) {
+    .results-page-container {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .info-text h1 {
+        font-size: 28px;
+
+    }
+    .info-block {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .info-image {
+        max-width: 90%;
+        height: auto;
+    }
+    .gen-summary {
+        width: 90%;
+        /* margin: 15px auto; */
+    }
+    .gen-summary-wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .info-image img {
+        width: 350px;
+        height: 270px;
+    }
+    .info-text p {
+        font-size: 18px;
+    }
+    .refresh-btn {
+        margin-left: 5%;    
+    }
+    .results-wrapper-block {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .summary-slide {
+        width: 10%;
+    }
+}

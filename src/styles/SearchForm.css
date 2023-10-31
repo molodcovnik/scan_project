@@ -147,3 +147,31 @@
     opacity: .5;
     cursor: none;
 }
+
+.error-label {
+    color: #FF5959;
+    font-size: 14px;
+    font-family: 'Inter', Helvetica, Arial, sans-serif;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .search_form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+
+    }
+    .chekbox-input {
+        display: none;
+    }
+    .range-search-inputs {
+        margin-bottom: 50px;
+    }
+
+    .find-button-block {
+        margin: 0 10%;
+    }
+}

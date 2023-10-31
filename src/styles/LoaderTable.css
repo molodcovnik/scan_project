@@ -19,3 +19,12 @@
     font-weight: 500;
     font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+@media only screen and (max-width: 480px) {
+    .summary-loader {
+        display: flex;
+        max-width: 90%;
+        margin: 15px auto;
+
+    }
+}

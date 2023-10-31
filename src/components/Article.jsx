@@ -1,5 +1,5 @@
 import React from 'react';
-
+import he from 'he';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Loader from './Loader';
@@ -7,10 +7,29 @@ import '../styles/Article.css';
 
 
 const Artcle = (props) => {
+    console.log(props)
     let year = props.article.ok.issueDate.slice(0, 4)
     let month = props.article.ok.issueDate.slice(5, 7)
     let day = props.article.ok.issueDate.slice(8, 10)
 
+    let xmlString = props.article.ok.content.markup;
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlString, "application/xml");
+
+    const html = document.createElement('div');
+    html.appendChild(doc.documentElement.cloneNode(true));
+    const finalHtml = html.innerHTML;
+
+    const decodeHtmlEntities = (str) => {
+        return he.decode(str, 'utf8');
+    }
+
+    const stripHtmlTags = (str) => {
+        return str.replace(/<\/?[^>]+(>|$)/g, '');
+    }
+
+    let cleanText = stripHtmlTags(decodeHtmlEntities(finalHtml));
     return (
         <div className="article">
             <div className="article-header">
@@ -20,22 +39,22 @@ const Artcle = (props) => {
             <div className="article-title">
                 <h2>{props.article.ok.title.text}</h2>
                 <div className="article-type">
-                    <div className="type"><p>Технические новости</p></div>
-                    <div className="type"><p>Технические новости</p></div>
-                    <div className="type"><p>Технические новости</p></div>
+                    <div className={props.article.ok.attributes.isTechNews ? `type isTechNews` : `hidden`}><p>Технические новости</p></div>
+                    <div className={props.article.ok.attributes.isAnnouncement ? "type isAnnouncement" : 'hidden'}><p>Анонсы и события</p></div>
+                    <div className={props.article.ok.attributes.isDigest ? "type isDigest" : 'hidden'}><p>Сводки новостей</p></div>
                 </div>
             </div>
             <div className="article-img">
                 <img src="article.svg" alt="article-image" />
             </div>
             <div className="article-text">
-                <p>SkillFactory — школа для всех, кто хочет изменить свою карьеру и жизнь. С 2016 года обучение прошли 20 000+ человек из 40 стран с 4 континентов, самому взрослому студенту сейчас 86 лет. Выпускники работают в Сбере, Cisco, Bayer, Nvidia, МТС, Ростелекоме, Mail.ru, Яндексе, Ozon и других топовых компаниях.
-                <br /><br />
-                Принципы SkillFactory: акцент на практике, забота о студентах и ориентир на трудоустройство. 80% обучения — выполнение упражнений и реальных проектов. Каждого студента поддерживают менторы, 2 саппорт-линии и комьюнити курса. А карьерный центр помогает составить резюме, подготовиться к собеседованиям и познакомиться с IT-рекрутерами.</p>
+                {cleanText}
             </div>
             <div className="article-footer">
                 <div className="article-btn">
-                    <button className='btn read-origin'>Читать в источнике</button>
+                    <button className='btn read-origin' onClick={() => {
+                        window.open(props.article.ok.url);
+                    }}>Читать в источнике</button>
                 </div>
                 <p>{props.article.ok.attributes.wordCount} слова</p>
             </div>

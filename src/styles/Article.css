@@ -13,11 +13,16 @@
     font-weight: 400;
     color: #949494;
     margin-top: 20px;
+    
 } 
 
 .article-header a { 
     color:#949494;
     text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
 .article-header p:first-of-type{
@@ -47,10 +52,23 @@
 
 .type {
     font-size: 16px;
-    background-color: #FFB64F;
-    padding: 3px 14px;
+    /* background-color: #FFB64F; */
+    padding: 3px 17px;
     margin-right: 5px;
     border-radius: 5px;
+}
+
+.isTechNews {
+    background-color: #FFB64F;
+
+}
+
+.isAnnouncement {
+    background-color: #5970FF;
+}
+
+.isDigest {
+    background-color: #7CE3E1;
 }
 
 .article-img {
@@ -70,6 +88,10 @@
     font-weight: 400;
     font-size: 16px;
     opacity: .5;
+    display: -webkit-box;
+    -webkit-line-clamp: 12;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
 .article-footer {
@@ -91,5 +113,26 @@
     color: #000000;
     background-color:#7CE3E1;
     font-family: 'Inter', Helvetica, Arial, sans-serif;
-    font-weight: 400
+    font-weight: 400;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 480px) {
+    .article {
+        width: 100%;
+        height: auto;
+    }
+    .article-img {
+        width: 80%;
+        height: auto;
+    }
+    .article-footer {
+        width: 100%;
+        justify-content: space-around;
+        margin-bottom: 15px;
+    }
+
+    .read-origin{
+        width: 250px;
+    }
 }
