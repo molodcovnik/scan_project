@@ -9,6 +9,7 @@ const AuthPage = () => {
     const url = 'https://gateway.scan-interfax.ru/api/v1/account/login';
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [loginError, setLoginError] = React.useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -24,9 +25,13 @@ const AuthPage = () => {
             localStorage.setItem('token', response.data.accessToken);
             // location.reload()
             location.href = '/';
+        
             
         } catch (error) {
-            console.log(error);
+            if (error.response.data.errorCode === 'Auth_InvalidUserOrPassword') {
+                setLoginError(true);
+            }
+
             
         }
     }
@@ -55,10 +60,13 @@ const AuthPage = () => {
                     </div>
                     <form className='form-auth-input' method='POST' onSubmit={handleSubmit}>
                         <label htmlFor="login">Логин или номер телефона</label>
-                        <input type="text" name='login' onChange={(e) => setLogin(e.target.value)} value={login}/>
+                        <input type="text" name='login' className={loginError ? 'error-input' : ''} onChange={(e) => setLogin(e.target.value)} value={login}/>
+                        
                         <label htmlFor="password">Пароль</label>
-                        <input type="password" name='password' onChange={(e) => setPassword(e.target.value)} value={password}/>
-                        <button type="submit" className='btn signin-btn'>Войти</button>
+                        <input type="password" name='password' className={loginError ? 'error-input' : ''} onChange={(e) => setPassword(e.target.value)} value={password}/>
+                        {loginError ? <span className='error'>Введите корректные данные</span> : ''}
+                        {login.length <= 4 || password.length <= 4 ? <button type="submit" disabled className='btn signin-btn'>Войти</button> :
+                        <button type="submit" className='btn signin-btn'>Войти</button>}
                         <a href="#" className='reset-pass'>Восстановить пароль</a>
                     </form>
                     <div className="social-auth">
@@ -69,8 +77,6 @@ const AuthPage = () => {
 
                     </div>
                 </div>
-                {/* <p>{login}</p>
-                <p>{password}</p> */}
             </div>
         </>
     );

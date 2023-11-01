@@ -7,7 +7,6 @@ import Loader from './Loader';
 
 
 const DocumentsList = (props) => {
-    // console.log(props.lists);
     const urlDocuments = 'https://gateway.scan-interfax.ru/api/v1/documents';
 
     const [articles, setArticles] = React.useState([]);
@@ -30,7 +29,11 @@ const DocumentsList = (props) => {
         setStartPage(startPage + 10);
         setEndPage(endPage + 10);
         setCurrentPage(currentPage + 1);    
-        // console.log(data.ids.length);
+        window.scrollTo({
+            top: 600,
+            left: 0,
+            behavior: "smooth",
+          });
     }
 
    

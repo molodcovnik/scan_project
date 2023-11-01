@@ -7,7 +7,6 @@ import '../styles/HeaderAuth.css';
 import { Link } from 'react-router-dom';
 
 const HeaderAuth = (props) => {
-    // console.log(props.token);
     const [companyCount, setCompanyCount] = React.useState(0);
     const [companyLimit, setCompanyLimit] = React.useState(0);
 
@@ -30,13 +29,12 @@ const HeaderAuth = (props) => {
     return (
         <div className="header-auth">   
             <div className="user-limit">
-                {/* <p>Использовано компаний <span className='use limit'>1</span></p> */}
                 <div><span className='opacity'>Использовано компаний </span><span className='use limit'>{companyCount}</span></div>
                 <div><span className='opacity'>Лимит по компаниям </span><span className='max limit'>{companyLimit}</span></div>
             </div>
             <div className="user-info">
                 <div className="user-name">
-                    <p>Alexey P.</p>
+                    <p>Алексей А.</p>
                     <Link to={'/auth'} onClick={(e) => {localStorage.removeItem('token');
                     location.reload()}} className='logout'>Выйти</Link>
                 </div>

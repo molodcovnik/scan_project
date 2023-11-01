@@ -20,12 +20,11 @@
     flex-direction: column;
     justify-content: center;
     background-color: #D9D9D9;
-    /* opacity: .4; */
 }
 
 
 .user-info {
-    width: 110px;
+    width: 130px;
     height: 32px;
     display: flex;
     justify-content: space-between;
@@ -33,6 +32,12 @@
 
 .user-info a {
     float: right;
+    margin-right: 10px;
+}
+
+.user-name {
+    width: 150px;
+    height: 50px;
 }
 
 .user-avatar {

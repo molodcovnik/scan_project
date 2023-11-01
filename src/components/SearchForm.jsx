@@ -44,6 +44,14 @@ const SearchForm = () => {
     const [excludeAnnouncements, setExcludeAnnouncements] = React.useState(true);
     const [excludeDigests, setExcludeDigests] = React.useState(true);
 
+    const [innError, setInnError] = React.useState(false);
+    const [limitError, setLimitError] = React.useState(false);
+    const [startDateError, setStartDateError] = React.useState(false);
+    const [endDateError, setEndDateError] = React.useState(false);
+    const [differenceError, setDifferenceError] = React.useState(false);
+
+    let now = new Date();
+
     async function handleSelect() {
 
         store.dispatch({type: 'ADD_INN', payload: inn});
@@ -65,7 +73,19 @@ const SearchForm = () => {
         <form action="" className="search_form" method='POST'>
             <div className="text-fields">
                 <label className='inn' htmlFor="inn">ИНН компании</label>
-                <input type="text" name='inn' placeholder='10 цифр' onChange={(e) => setInn(e.target.value)}/>
+                <input type="text" className={innError ? 'error-input' : ''}
+                        name='inn' placeholder='10 цифр'
+                        onChange={(e) => {
+                            let pattern = new RegExp("^[0-9]{10}$");
+                            if (pattern.test(e.target.value)) {
+                                setInn(e.target.value);
+                                setInnError(false);
+                            } else {
+                                setInnError(true);
+                            }
+
+                            }}/>
+                {innError ? <span className='error'>Введите корректные данные</span> : ''}
 
                 <label className='key' htmlFor="key">Тональность</label>
                 <select name="key" className='key-tone' onChange={(e) => setTonality(e.target.value)}>
@@ -75,12 +95,53 @@ const SearchForm = () => {
                 </select>
 
                 <label className='count-doc' htmlFor="count-doc">Количество документов в выдаче</label>
-                <input type="text" placeholder='От 1 до 1000' onChange={(e) => setLimit(e.target.value)}/>
+                <input type="text" placeholder='От 1 до 1000' className={limitError ? 'error-input' : ''}
+                    onChange={(e) => {
+                        let pattern = new RegExp("^([1-9][0-9]{0,2}|1000)$");
+                            if (pattern.test(e.target.value)) {
+                                setLimit(e.target.value);
+                                setLimitError(false);
+                            } else {
+                                setLimitError(true);
+                            }
 
+                        }}/>
+                {limitError ? <span className='error'>От 1 до 1000</span> : ''}
+                        
                 <div className="range-search-inputs">
                     <p className='range-date'>Диапазон поиска</p>
-                    <input type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)}/>
-                    <input type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)}/>
+                    <input type="date" name="startDate" className={startDateError || differenceError? 'error-input' : ''}
+                        onChange={(e) => {
+                            // setStartDate(e.target.value);
+                            let start = new Date(e.target.value);
+                            if (now - start <= 0) {
+                                setStartDateError(true);
+                            } else {
+                                setStartDateError(false);
+                                setStartDate(e.target.value)}
+                            }}/>
+                    
+                    <input type="date" name="endDate" className={endDateError || differenceError? 'error-input' : ''}
+                        onChange={(e) => {
+                            let end = new Date(e.target.value);
+                            if (now - end <= 0) {
+                                setEndDateError(true);
+                            } else {
+                                setEndDateError(false);
+                                setEndDate(e.target.value)}
+                            
+                            if (new Date(startDate) > end) {
+                                setDifferenceError(true);
+                            } else {
+                                setDifferenceError(false);
+                            }
+                            }}/>
+                </div>
+
+                <div className="range-search-inputs-errors">
+                    <div className="start-date-error">{startDateError ? <span className='error'>Дата не может быть больше текущей</span> : ''}</div>
+                    <div className="end-date-error">{endDateError ? <span className='error'>Дата не может быть больше текущей</span> : ''}</div>
+                    <div className="difference-time">{differenceError ? <span className='error'>Дата начала не может быть позже даты конца</span> : ''}</div>
                 </div>
             </div> 
             <div className="checkbox-fields">
@@ -115,7 +176,7 @@ const SearchForm = () => {
                
                 <div className="find-button-block">
                     <Link to="/results" onClick={handleSelect} className={`btn find-btn ${inn != '' & startDate != '' & endDate != '' ? 'visible' : 'non-active' }`}>Поиск</Link>
-                    {/* <button onClick={() => {}} className={`btn find-btn`}>Поиск</button> */}
+
                     <p>* Обязательные к заполнению поля</p>
                 </div>
             </div>       

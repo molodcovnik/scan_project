@@ -18,7 +18,7 @@ const Header = () => {
                 </div>
                 <div className="header-menu">
                     <ul>
-                        <li><a href='#'>Главная</a></li>
+                        <li><Link to={'/'}>Главная</Link></li>
                         <li><a href='#'>Тарифы</a></li>
                         <li><a href='#'>FAQ</a></li>
                     </ul>

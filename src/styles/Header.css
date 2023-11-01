@@ -21,6 +21,12 @@
     color: #000000;
 }
 
+.header-menu a:hover {
+    font-size: 18px;
+    opacity: .5;
+    transition: .2s;
+}
+
 .header-menu ul {
     display: flex;
     justify-content: space-between;

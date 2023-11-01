@@ -28,18 +28,18 @@ const ResultsPage = () => {
 
     const [statusDocs, setStatusDocs] = React.useState('');
 
-    let inn = state.inn.at(1);
-    let startDate = state.startDate.at(1);
-    let endDate = state.endDate.at(1);
-    let limit = state.limit.at(1);
-    let maxFullness = state.maxFullness.at(1);
-    let inBusinessNews = state.inBusinessNews.at(1);
-    let onlyMainRole = state.onlyMainRole.at(1);
-    let tonality = state.tonality.at(1);
-    let onlyWithRiskFactors = state.onlyWithRiskFactors.at(1);
-    let excludeTechNews = state.excludeTechNews.at(1);
-    let excludeAnnouncements = state.excludeAnnouncements.at(1);
-    let excludeDigests = state.excludeDigests.at(1);
+    let inn = state.inn.at(-1);
+    let startDate = state.startDate.at(-1);
+    let endDate = state.endDate.at(-1);
+    let limit = state.limit.at(-1);
+    let maxFullness = state.maxFullness.at(-1);
+    let inBusinessNews = state.inBusinessNews.at(-1);
+    let onlyMainRole = state.onlyMainRole.at(-1);
+    let tonality = state.tonality.at(-1);
+    let onlyWithRiskFactors = state.onlyWithRiskFactors.at(-1);
+    let excludeTechNews = state.excludeTechNews.at(-1);
+    let excludeAnnouncements = state.excludeAnnouncements.at(-1);
+    let excludeDigests = state.excludeDigests.at(-1);
 
     const urlHistograms = 'https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms';
     const urlObjects = 'https://gateway.scan-interfax.ru/api/v1/objectsearch';
@@ -120,10 +120,14 @@ const ResultsPage = () => {
             if (objects.statusText === "OK") {
                 setStatusDocs(objects.statusText)
             }
-            setTotalData(histograms.data.data);
-            setTotalDocuments(histograms.data.data[0].data);
-            setRiskFactors(histograms.data.data[1].data);
-
+            try {
+                setTotalData(histograms.data.data);
+                setTotalDocuments(histograms.data.data[0].data);
+                setRiskFactors(histograms.data.data[1].data);
+            } catch (error) {
+                console.log(error);
+                location.href = '/';
+            }
             objects.data.items.map((item) => {
                 setListId(listId => [...listId, item.encodedId]);
                 });
@@ -132,6 +136,10 @@ const ResultsPage = () => {
     []);
 
     let uniqueId = [...new Set(listId)];
+
+    let totalCount = totalDocuments.reduce((prev, cur) => {
+        return prev + cur.value
+    }, 0);
 
     return (
         <>
@@ -148,8 +156,7 @@ const ResultsPage = () => {
                 </div>
                 {totalDocuments.length > 0 ? <div className="gen-summary-wrapper">
                     <h2>Общая сводка</h2>
-                    <p>{inn}</p>
-                    <p>Найдено {totalDocuments.length} вариантов</p>
+                    <p>Найдено {totalCount} вариантов</p>
                      <div className="gen-summary">
 
                             <div className="summary-head">
@@ -172,9 +179,6 @@ const ResultsPage = () => {
                 
             </div>
             </div>
-            <button className='btn refresh-btn' onClick={() => {
-                    location.reload();
-                    location.href='/search'}}>Перезагрузка</button>
             {statusDocs === "OK" ? <div className="results-wrapper-block">
                 <DocumentsList lists={uniqueId} status={statusDocs}/>
             </div> : <Loader/>}

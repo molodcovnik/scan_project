@@ -7,7 +7,6 @@ import '../styles/Article.css';
 
 
 const Artcle = (props) => {
-    console.log(props)
     let year = props.article.ok.issueDate.slice(0, 4)
     let month = props.article.ok.issueDate.slice(5, 7)
     let day = props.article.ok.issueDate.slice(8, 10)
