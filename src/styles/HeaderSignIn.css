@@ -27,19 +27,5 @@
 }
 
 @media only screen and (max-width: 480px) {
-    .header-signin {
-        background-image: url('../../public/header-btn.svg');
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-    }
-    .signin {
-        display: none;
-    }
-    .header-signin a {
-        display: none;
-    }
-    .header-signin img {
-        display: none;
-    }
+    
 }

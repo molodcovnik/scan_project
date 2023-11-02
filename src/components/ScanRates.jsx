@@ -18,6 +18,7 @@ const ScanRates = () => {
                                 <img src="lamp.svg" alt="beginner" />
                             </div>
                         </div>
+                        <div className="current-rates"><span>Текущий тариф</span></div>
                         <div className="rate-info">
                             <div className="info">
                                 <span>799 ₽</span>
@@ -33,7 +34,7 @@ const ScanRates = () => {
                                 </ul>
                             </div>
                             <div className="btn-detail">
-                                <button className='btn'>Подробнее</button>
+                                <button className='btn to-lk'>Перейти в личный кабинет</button>
                             </div>
                         </div>
                     </div>

@@ -24,6 +24,10 @@
     box-shadow: 0px 0px 20px 0px #bbb8b8;
 }
 
+.to-lk {
+    background-color: #D2D2D2;
+}
+
 .rate:first-of-type {
     border: #FFB64F solid 2px;
 
@@ -110,6 +114,18 @@
     margin: 50px 20px 20px 30px;
 }
 
+.current-rates {
+    float: right;
+    margin: 20px 20px;
+    background-color: #3BA5E0;
+    color: #FFFFFF;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
 .info p {
     font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial;
     font-size: 18px;
@@ -182,5 +198,13 @@
     }
     .rate-text p:last-child{
        padding-left: 14px;
+    }
+
+    .to-lk {
+        font-size: 14px;
+    }
+
+    .current-rates {
+        margin: 5px 5px;
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import BurgerMenu from './BurgerMenu';
 import { useEffect } from 'react';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ const HeaderAuth = (props) => {
 
     const url = 'https://gateway.scan-interfax.ru/api/v1/account/info';
 
+    
     useEffect(() => {
         axios.get(url, {
             headers: {
@@ -32,7 +33,7 @@ const HeaderAuth = (props) => {
                 <div><span className='opacity'>Использовано компаний </span><span className='use limit'>{companyCount}</span></div>
                 <div><span className='opacity'>Лимит по компаниям </span><span className='max limit'>{companyLimit}</span></div>
             </div>
-            <div className="user-info">
+            <div className={ window.innerWidth > 1024 ? "user-info" : 'hidden'}>
                 <div className="user-name">
                     <p>Алексей А.</p>
                     <Link to={'/auth'} onClick={(e) => {localStorage.removeItem('token');
@@ -41,6 +42,15 @@ const HeaderAuth = (props) => {
                 <div className="user-avatar">
                     <img src="avatar.png" alt="avatar" />
                 </div>
+            </div>
+            <div className={ window.innerWidth > 1024 ? 'hidden' : "burger-menu-btn"}>
+                <img src="burger-menu.svg" alt="alt" onClick={() => {
+                    console.log('click burger-menu');
+                    props.setBurgerTouches(true);
+                }} />
+            </div>
+            <div className={props.burgerTouches ? "burger-all-width" : "hidden"}>
+                <BurgerMenu burgerTouches={props.burgerTouches} setBurgerTouches={props.setBurgerTouches}/>
             </div>
         </div>
     );
