@@ -15,6 +15,16 @@ module.exports = {
     resolve: {
         extensions: [".js",".jsx",".json",".ts",".tsx"]
     },
+    performance: {
+        // подсказки
+        hints: false,
+        // максимальный размер входной точки в байтах
+        // по умолчанию 250000
+        maxEntrypointSize: 1024000,
+        // максимальный размер статических ресурсов
+        // по умолчанию 250000
+        maxAssetSize: 1024000
+      },
     module: {
         rules: [
             {
@@ -29,33 +39,13 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ["style-loader", "css-loader"]
             },
-            // {
-            //     test: /\.(jpe?g|png|webp|gif|svg|jpg)$/i,
-            //     use: [{
-            //         loader: 'image-webpack-loader',
-            //         options: {
-            //             mozjpeg: {
-            //               progressive: true,
-            //             },
-            //             // optipng.enabled: false will disable optipng
-            //             optipng: {
-            //               enabled: false,
-            //             },
-            //             pngquant: {
-            //               quality: [0.65, 0.90],
-            //               speed: 4
-            //             },
-            //             gifsicle: {
-            //               interlaced: false,
-            //             },
-            //             // the webp option will enable WEBP
-            //             webp: {
-            //               quality: 75
-            //             }
-            //           }
-            //     }],
-            //     type: 'asset/resource',
-            // },
+            {
+                test: /\.(gif|png|jpg|jpeg|svg)?$/,
+                loader: 'file-loader',
+                options: {
+                  name: 'assets/img/[name].[ext]',
+                },
+            },
         ]
     },
     plugins: [
