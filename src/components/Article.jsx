@@ -44,7 +44,7 @@ const Artcle = (props) => {
                 </div>
             </div>
             <div className="article-img">
-                <img src="../public/article.svg" alt="article-image" />
+                <img src="article.svg" alt="article-image" />
             </div>
             <div className="article-text">
                 {cleanText}
