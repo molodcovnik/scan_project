@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import store from '../store';
 
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
@@ -43,6 +42,8 @@ const ResultsPage = () => {
 
     const urlHistograms = 'https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms';
     const urlObjects = 'https://gateway.scan-interfax.ru/api/v1/objectsearch';
+
+    const token = localStorage.getItem('token');
 
     const headers = {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -126,7 +127,7 @@ const ResultsPage = () => {
                 setRiskFactors(histograms.data.data[1].data);
             } catch (error) {
                 console.log(error);
-                location.href = '/';
+                location.href = '*';
             }
             objects.data.items.map((item) => {
                 setListId(listId => [...listId, item.encodedId]);
@@ -140,24 +141,24 @@ const ResultsPage = () => {
     let totalCount = totalDocuments.reduce((prev, cur) => {
         return prev + cur.value
     }, 0);
-
-    return (
-        <>
-            <div className="results-page">
-            <div className="results-page-container">
-                <div className="info-block">
-                    <div className="info-text">
-                        <h1>Ищем. Скоро <br />будут результаты</h1>
-                        <p>Поиск может занять некоторое время, <br />просим сохранять терпение.</p>
+    if (token) {
+        return (
+            <>
+                <div className="results-page">
+                <div className="results-page-container">
+                    <div className="info-block">
+                        <div className="info-text">
+                            <h1>Ищем. Скоро <br />будут результаты</h1>
+                            <p>Поиск может занять некоторое время, <br />просим сохранять терпение.</p>
+                        </div>
+                        <div className="info-image">
+                            <img src="group117.svg" alt="find" />
+                        </div>
                     </div>
-                    <div className="info-image">
-                        <img src="group117.svg" alt="find" />
-                    </div>
-                </div>
-                {totalDocuments.length > 0 ? <div className="gen-summary-wrapper">
-                    <h2>Общая сводка</h2>
-                    <p>Найдено {totalCount} вариантов</p>
-                     <div className="gen-summary">
+                    {totalDocuments.length > 0 ? <div className="gen-summary-wrapper">
+                        <h2>Общая сводка</h2>
+                        <p>Найдено {totalCount} вариантов</p>
+                        <div className="gen-summary">
 
                             <div className="summary-head">
                                 <p>Период</p>
@@ -165,25 +166,41 @@ const ResultsPage = () => {
                                 <p>Риски</p>
                             </div>
 
-                            {(totalDocuments.length && riskFactors.length) ? 
-                                totalDocuments.map(item1 => {
-                                    const matchingItem = riskFactors.find(item2 => item1.date === item2.date);
-                                    if (matchingItem) {
-                                        return (
-                                            <SummarySlide key={item1.date} date={item1.date} total={item1.value} risks={matchingItem.value}/>
-    
-                                    )};
-                                }): <p>No data</p>}
-                    </div> 
-                </div> : <LoaderTable/>}
-                
-            </div>
-            </div>
-            {statusDocs === "OK" ? <div className="results-wrapper-block">
-                <DocumentsList lists={uniqueId} status={statusDocs}/>
-            </div> : <Loader/>}
-        </>
-    );
+                            <Swiper
+                                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                spaceBetween={20}
+                                slidesPerView={window.innerWidth > 1024 ? 7 : 1}
+                                navigation
+                                pagination={{ clickable: true }}
+
+                                onSlideChange={() => console.log('slide change')}
+                                onSwiper={(swiper) => console.log(swiper)}>
+
+                                {(totalDocuments.length && riskFactors.length) ? 
+                                    totalDocuments.map(item1 => {
+                                        const matchingItem = riskFactors.find(item2 => item1.date === item2.date);
+                                        if (matchingItem) {
+                                            return (
+                                                <SwiperSlide key={item1.date}>
+                                                    <SummarySlide key={item1.date} date={item1.date} total={item1.value} risks={matchingItem.value}/>
+                                                </SwiperSlide>
+                                        )};
+                                    }): <p>No data</p>}
+                            </Swiper>
+
+                        </div> 
+                    </div> : <LoaderTable/>}
+                    
+                </div>
+                </div>
+                {statusDocs === "OK" ? <div className="results-wrapper-block">
+                    <DocumentsList lists={uniqueId} status={statusDocs}/>
+                </div> : <Loader/>}
+            </>
+        );
+    } else {
+        location.href = '/auth';
+    }
 };
 
 export default ResultsPage;

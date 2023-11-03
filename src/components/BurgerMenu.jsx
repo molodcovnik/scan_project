@@ -26,7 +26,7 @@ const BurgerMenu = (props) => {
                     <ul>
                         <li><Link to={'/'} onClick={() => props.setBurgerTouches(false)}>Главная</Link></li>
                         <li><Link to={'#'} onClick={() => {props.setBurgerTouches(false);scrollRates()}}>Тарифы</Link></li>
-                        <li><Link to={'#'} onClick={() => props.setBurgerTouches(false)}>FAQ</Link></li>
+                        <li><Link to={'/faq'} onClick={() => props.setBurgerTouches(false)}>FAQ</Link></li>
                     </ul>
                     <Link to={'#'} onClick={() => props.setBurgerTouches(false)}>Зарегистрироваться</Link>
                     <Link to={'/auth'} className={localStorage.getItem('token') ? "hidden" : 'burger-btn sign-in'} onClick={() => props.setBurgerTouches(false)}>Войти</Link>

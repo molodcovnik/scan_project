@@ -21,7 +21,7 @@ const Header = () => {
                     <ul>
                         <li><Link to={'/'}>Главная</Link></li>
                         <li><a href='#'>Тарифы</a></li>
-                        <li><a href='#'>FAQ</a></li>
+                        <li><Link to={'/faq'}>FAQ</Link></li>
                     </ul>
                 </div>
                 {token ? <HeaderAuth token={token} burgerTouches={burgerTouches} setBurgerTouches={setBurgerTouches}/> : <HeaderSignIn burgerTouches={burgerTouches} setBurgerTouches={setBurgerTouches}/>}

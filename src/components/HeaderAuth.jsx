@@ -36,8 +36,9 @@ const HeaderAuth = (props) => {
             <div className={ window.innerWidth > 1024 ? "user-info" : 'hidden'}>
                 <div className="user-name">
                     <p>Алексей А.</p>
-                    <Link to={'/auth'} onClick={(e) => {localStorage.removeItem('token');
-                    location.reload()}} className='logout'>Выйти</Link>
+                    <Link to={'/'} onClick={(e) => {
+                        localStorage.removeItem('token');
+                        location.href = '/'}} className='logout'>Выйти</Link>
                 </div>
                 <div className="user-avatar">
                     <img src="avatar.png" alt="avatar" />

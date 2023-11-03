@@ -1,0 +1,31 @@
+.slide-wrapper-summary {
+    display: flex;
+}
+.summary-slide {
+    background-color: #fff;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+}
+
+.slide-line {
+    width: 2px;
+    height: 124px;
+    background-color: #949494;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.slide-line:last-of-type {
+    margin-right: 15px;
+}
+
+@media only screen and (max-width: 480px) {
+    .summary-slide {
+        margin-left: 20px;
+    }
+    
+}
