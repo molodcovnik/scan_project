@@ -71,9 +71,9 @@ const AuthPage = () => {
                     </form>
                     <div className="social-auth">
                         <p>Войти через:</p>
-                        <a href="#"><img src="google.svg" alt="google" /></a>
-                        <a href="#"><img src="facebook.svg" alt="facebook" /></a>
-                        <a href="#"><img src="yandex.svg" alt="yandex" /></a>
+                        <a href="#"><img src="../public/google.svg" alt="google" /></a>
+                        <a href="#"><img src="../public/facebook.svg" alt="facebook" /></a>
+                        <a href="#"><img src="../public/yandex.svg" alt="yandex" /></a>
 
                     </div>
                 </div>

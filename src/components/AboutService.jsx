@@ -15,7 +15,7 @@ const AboutService = () => {
             </div>
             <div className="about-img">
                 <div className="block"></div>
-                <img src="about_img.svg" alt="about"/>
+                <img src="../public/about_img.svg" alt="about"/>
             </div>
         </div>
     );
